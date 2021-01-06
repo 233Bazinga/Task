@@ -35,7 +35,7 @@ jobs:
         if: env.QQREAD_TIMEHD
         run: |
           cd ~/Scripts
-          node Task/reader.js
+          node reader.js
         env:          
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
