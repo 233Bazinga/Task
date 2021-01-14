@@ -15,8 +15,7 @@ jobs:
         if: github.event.repository.owner.id == github.event.sender.id
         steps:
             - name: Checkout
-              run: |
-                git clone -b master https://github.com/sazs34/MyActions.git ~/Scripts
+              uses: actions/checkout@v2
 
             - name: 'Set up Python'
               uses: actions/setup-python@v1
@@ -24,14 +23,10 @@ jobs:
                   python-version: 3.7
 
             - name: 'Install dependencies'
-              run: |
-                cd ~/Scripts
-                pip install -r ./requirements.txt
+              run: pip install -r ./requirements.txt
 
             - name: 'Run script'
-              run: |
-                cd ~/Scripts
-                python3 xmly_speed.py
+              run: python3 xmly_speed.py
               env:
                   XMLY_SPEED_COOKIE: ${{ secrets.XMLY_SPEED_COOKIE || github.event.client_payload.XMLY_SPEED_COOKIE }}
                   XMLY_ACCUMULATE_TIME: ${{ secrets.XMLY_ACCUMULATE_TIME || github.event.client_payload.XMLY_ACCUMULATE_TIME }}
